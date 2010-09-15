@@ -1,0 +1,13 @@
+<% for journal in @version.journals %>
+  <%= render_journal version, journal, :edit_permission => :manage_versions %>
+<% end %>
+
+<% if authorize_for('versions', 'edit') %>
+  <div id="update" style="display:none;">
+    <h3><%= l(:button_update) %></h3>
+    <% labelled_tabular_form_for :version, @version, :url => { :action => 'edit', :id => @version } do |f| %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
+      <%= submit_tag l(:button_save) %>
+    <% end %>
+  </div>
+<% end %>
